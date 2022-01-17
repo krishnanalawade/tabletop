@@ -71,17 +71,18 @@ const EditUser = (props) => {
             <form onSubmit={handleSubmit}>
                 <Grid container>
                     <Grid item xs={6}>
-                        <TextField id="first_name" label="First Name" fullWidth className={classes.margin} value={first_name}
+                        <TextField required id="first_name" label="First Name" fullWidth className={classes.margin} value={first_name}
                             onChange={handleFirstNameChange} name="First Name" />
 
-                        <TextField id="last_name" label="Last Name" fullWidth className={classes.margin} value={last_name}
+                        <TextField required id="last_name" label="Last Name" fullWidth className={classes.margin} value={last_name}
                             onChange={handleLastNameChange} name="Last Name" />
 
-                        <TextField fullWidth inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
+                        <TextField required fullWidth inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
                             id="contact_number" label="Contact Number" className={classes.margin}
                             onChange={handleContactNumberChange} name="Contact Number" value={contact_number} />
 
                         <TextField
+                            required
                             fullWidth
                             id="outlined-select-session"
                             select
