@@ -6,6 +6,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 In the project directory, you can run:
 
+### `npm install`
 ### `npm start`
 
 Runs the app in the development mode.\
@@ -68,3 +69,23 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
+### `Questions`
+1) How long, in hours, did you spend on the test (not including learning)?
+-  14 Hours
+
+2) Did you have to learn any new languages/technologies? If so, which ones and what
+resources did you use for your learning?
+-  No
+
+3) If you had more time, what further improvements or new features would you add?
+-  I will add below features in this
+    1) Free Text search,Filter on all fields
+    2) Pagination for players list features.
+        
+4) What did you spend the most time on? What did you find most difficult?
+-  I have spent time on material UI library. As such there is no difficulty according to me.
+
+5) How did you find the test overall? If you have any suggestions on how we can improve the test we’d love to hear them.
+-  As per the test content it is good to test the overall knowledge of candiate

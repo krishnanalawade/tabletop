@@ -16,9 +16,10 @@ import TextField from '@mui/material/TextField';
 import { Grid } from "@mui/material";
 import MenuItem from '@mui/material/MenuItem';
 import GameSessionsList from '../data/gameSession'
-import { useState ,useEffect } from "react";
+import { useState, useEffect } from "react";
 import IconButton from '@mui/material/IconButton';
 import ClearIcon from '@mui/icons-material/Clear';
+import TablePagination from '@mui/material/TablePagination';
 
 const useStyles = makeStyles((theme) => ({
     container: {
@@ -30,21 +31,35 @@ const useStyles = makeStyles((theme) => ({
 }));
 const UsersList = () => {
     const usersList = useSelector(state => state.users.usersList);
-    const [filteredUsersList , setFilteredUsersList] = useState(usersList);
-    const [gameSession , setGameSession ] = useState('');
+    const [filteredUsersList, setFilteredUsersList] = useState(usersList);
+    const [gameSession, setGameSession] = useState('');
     const classes = useStyles();
     const handleSearchReq = (event) => {
-        let filteredUsers = usersList.filter((user)=>user.sessions === event.target.value);
+        let filteredUsers = usersList.filter((user) => user.sessions === event.target.value);
         setFilteredUsersList(filteredUsers);
         setGameSession(event.target.value)
+        setPage(0);
     }
     const clearSearchReq = (event) => {
         setFilteredUsersList(usersList);
         setGameSession('')
     }
-    useEffect(()=>{
+    useEffect(() => {
         setFilteredUsersList(usersList);
-    },[usersList])
+    }, [usersList])
+
+    const [page, setPage] = useState(0);
+    const [rowsPerPage, setRowsPerPage] = useState(10);
+
+    const handleChangePage = (event, newPage) => {
+        setPage(newPage);
+    };
+
+    const handleChangeRowsPerPage = (event) => {
+        setRowsPerPage(parseInt(event.target.value, 10));
+        setPage(0);
+    };
+
     return (
         <div className={classes.container}>
             <Grid container>
@@ -66,12 +81,12 @@ const UsersList = () => {
                         ))}
                     </TextField>
                 </Grid>
-                <Grid item xs={1} style={{marginTop:"5px"}}>
+                <Grid item xs={1} style={{ marginTop: "5px" }}>
                     <IconButton aria-label="clear" className={classes.floatRight} onClick={clearSearchReq}>
                         <ClearIcon />
                     </IconButton>
                 </Grid>
-                <Grid item xs={5} style={{float:"right"}}>
+                <Grid item xs={5} style={{ float: "right" }}>
                     <Link to="/user/add" >
                         <Button variant="contained" startIcon={<Add />} className={classes.floatRight}>
                             Add Player
@@ -91,7 +106,8 @@ const UsersList = () => {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {filteredUsersList.map((row) => (
+                        {filteredUsersList && filteredUsersList.length > 0 && 
+                            filteredUsersList.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => (
                             <TableRow
                                 key={row.id}
                                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
@@ -110,8 +126,25 @@ const UsersList = () => {
                                 </TableCell>
                             </TableRow>
                         ))}
+
+                        {
+                           filteredUsersList.length == 0 &&
+                           <p>No Records Found</p>
+                        }
                     </TableBody>
                 </Table>
+                {
+                    filteredUsersList && filteredUsersList.length > 0 &&
+                    <TablePagination
+                        component="div"
+                        count={filteredUsersList.length}
+                        page={page}
+                        onPageChange={handleChangePage}
+                        rowsPerPage={rowsPerPage}
+                        onRowsPerPageChange={handleChangeRowsPerPage}
+                    />
+                }
+
             </TableContainer>
         </div>
     );

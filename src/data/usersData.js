@@ -181,7 +181,7 @@ const USERS_LIST = [
       last_name: "Wheeler",
       contact_number: "07445845711",
       campaign_name: "Tomb of Horrors",
-      sessions: ""
+      sessions: "The Sea Witch"
     }
 ]
 

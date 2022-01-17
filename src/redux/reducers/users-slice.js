@@ -10,19 +10,18 @@ const usersSlice = createSlice({
     },
     reducers:{
         addUser(state,action){
-            state.usersList.push({
+            state.usersList.unshift({
                 id:state.usersList.length+1,
                 first_name:action.payload.first_name,
                 last_name:action.payload.last_name,
                 contact_number:action.payload.contact_number,
                 sessions:action.payload.sessions,
             })
-            console.log(state.usersList);
         },
         deleteUser(state,action){
             const id = action.payload.id;
             const existingItem = state.usersList.find((user)=>user.id ===id);
-            console.log(existingItem.id);
+            
             if(existingItem){
                 state.usersList = state.usersList.filter((user)=>user.id !== existingItem.id);
             }
